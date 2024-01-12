@@ -54,7 +54,7 @@ If successful, the following message will appear:
 admin created successfully
 ```
 
-### Mendapatkan Token Authentication
+### Obtaining an Authentication Token (JWT)
 
 To get the JWT auth token, you can access it with Postman:
 
@@ -129,7 +129,7 @@ Using the `GET` method with a URL:
 http://localhost:4000/api/v1/hello-world
 ```
 
-> You can add queries in it.
+> You can add queries in it. Don't forget to add a token in the header with the prefix `Bearer`.
 
 #### Hello World Create
 
@@ -139,7 +139,8 @@ Using the `POST` method with a URL:
 http://localhost:4000/api/v1/hello-world
 ```
 
-> You can add body (JSON) to it.
+> You can add body (JSON) to it. 
+> **_Don't forget to add a token in the header with the prefix `Bearer`._**
 
 #### Hello World Detail
 
@@ -152,7 +153,7 @@ http://localhost:4000/api/v1/hello-world/123
 > You can change the `123` parameter above.
 > This parameter is an accessible `:id`
 > with `params.id` on the controller.
-
+> **_Don't forget to add a token in the header with the prefix `Bearer`._**
 #### Hello World Update
 
 Using the `PUT` method with the URL:
@@ -168,7 +169,8 @@ http://localhost:4000/api/v1/hello-world/123
 > later you can use it as the content of the data
 > that you want to change (for now, document/table
 > not created yet, don't worry. This is just a test
-> to ensure your API is working properly).
+> to ensure your API is working properly). 
+> **_Don't forget to add a token in the header with the prefix `Bearer`._**
 
 #### Hello World Delete
 
@@ -181,6 +183,7 @@ http://localhost:4000/api/v1/hello-world/123
 > You can change the `123` parameter above.
 > This parameter is an accessible `:id`
 > with `params.id` on the controller.
+> **_Don't forget to add a token in the header with the prefix `Bearer`._**
 
 ### Running Development Server
 
