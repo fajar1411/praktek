@@ -129,7 +129,8 @@ Using the `GET` method with a URL:
 http://localhost:4000/api/v1/hello-world
 ```
 
-> You can add queries in it. Don't forget to add a token in the header with the prefix `Bearer`.
+> You can add queries in it.
+> **_Don't forget to add a token in the header with the prefix `Bearer`._**
 
 #### Hello World Create
 
