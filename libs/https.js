@@ -1,3 +1,6 @@
+const {TokenExpiredError} = require("jsonwebtoken");
+
+
 const LibHTTPResponseException = (res, error) => {
   if (error?.status === 401 && error?.message) {
     return res.status(error.status).json({
@@ -13,9 +16,16 @@ const LibHTTPResponseException = (res, error) => {
     });
   } else {
     console.log("LibServiceResponseException", error);
-    return res.status(500).json({
-      detail: "Something when wrong!",
-    });
+    if (error instanceof TokenExpiredError) {
+      return res.status(401).json({
+        detail: "Token JWT expired.",
+      });
+    } else {
+      return res.status(500).json({
+        detail: "Something when wrong!",
+      });
+    }
+
   }
 };
 
