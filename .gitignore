@@ -1,5 +1,6 @@
 node_modules
-modules/*
+!modules/index.js
+plugins/*.zip
 .idea
 .vscode
 .vsc
