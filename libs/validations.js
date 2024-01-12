@@ -68,6 +68,9 @@ const CharField = ({ minLength = 1, maxLength = 225, ...args }) => {
 const NumberField = ({ minLength = 1, maxLength = 20000000, ...args }) => {
   const fieldSet = Field(args);
   fieldSet
+    .isNumeric()
+    .withMessage("Field must be numeric value.")
+    .bail()
     .isInt({ min: minLength, max: maxLength })
     .withMessage(`Fields must be at a minimum of ${minLength}`)
     .bail();
