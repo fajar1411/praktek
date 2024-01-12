@@ -37,7 +37,7 @@ const Field = ({
   widget = widget ? widget : body;
   const fieldSet = widget(field);
 
-  fieldSet.notEmpty().withMessage("This field not be blank");
+  fieldSet.notEmpty().withMessage("This field not be blank").bail();
 
   if (!required) {
     fieldSet.optional();
@@ -60,7 +60,7 @@ const CharField = ({ minLength = 1, maxLength = 225, ...args }) => {
     .isLength({ min: minLength, max: maxLength })
     .withMessage(
       `This field must have a minimum of ${minLength} characters and no more than ${maxLength} characters`
-    );
+    ).bail();
 
   return fieldSet;
 };
@@ -69,10 +69,51 @@ const NumberField = ({ minLength = 1, maxLength = 20000000, ...args }) => {
   const fieldSet = Field(args);
   fieldSet
     .isInt({ min: minLength, max: maxLength })
-    .withMessage(`Fields must be at a minimum of ${minLength}`);
+    .withMessage(`Fields must be at a minimum of ${minLength}`)
+    .bail();
 
   return fieldSet;
 };
+
+const ArrayField = ({ minLength = 1, maxLength = 30, ...args }) => {
+  const fieldSet = Field(args);
+  fieldSet.isArray({min: minLength, max: maxLength}).withMessage(`
+    The minimum length of items in the array is ${minLength} and the maximum is ${maxLength}
+  `).bail()
+  return fieldSet;
+}
+
+const ObjectField = ({strict= true, ...args}) => {
+  const fieldSet = Field(args);
+  fieldSet.isObject({strict}).withMessage(`Invalid object`).bail()
+  return fieldSet;
+}
+
+const EmailField = ({host_blacklist=[], host_whitelist=[], allow_ip_domain=true, ...args}) => {
+  const fieldset = Field(args);
+  fieldset.isEmail({
+    host_blacklist,
+    host_whitelist,
+    allow_ip_domain
+  }).withMessage("Your email is invalid").bail()
+
+  return fieldset
+}
+
+/**
+ * DateField for date validation
+ * @param format
+ * @param delimeters
+ * @param strictMode
+ * @param args
+ * @returns {*}
+ * @constructor
+ */
+const DateField = ({format="", delimeters=[], strictMode=false, ...args}) => {
+  const fieldset = Field(args);
+  fieldset.isDate({format, delimeters, strictMode}).withMessage("Invalid date").bail();
+  return fieldset
+}
 
 const LibValidationsMiddleware = (...args) => {
   return args;
@@ -85,5 +126,9 @@ module.exports = {
     Field,
     CharField,
     NumberField,
+    ArrayField,
+    ObjectField,
+    EmailField,
+    DateField,
   },
 };

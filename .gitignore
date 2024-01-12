@@ -1,6 +1,4 @@
 node_modules
-!modules/index.js
-modules/*/
 plugins/*.zip
 .idea
 .vscode
