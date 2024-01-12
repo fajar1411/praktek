@@ -186,28 +186,18 @@ const LibCLIRunning = async () => {
     const options = program.opts();
 
     if (options.make && options.module) {
-      spinner.start("[eiwa] creating module...")
-      setTimeout(async () => {
-        spinner.stop()
-        await LibCLIModule()
-        spinner.succeed("[eiwa] creating module successfully...")
-      }, 1000)
+      await LibCLIModule()
+      spinner.succeed("[eiwa] creating module successfully...")
     }
 
     if (options.make && options.admin) {
-      spinner.start("[eiwa] creating admin...")
-      spinner.stop()
       await LibCLIMakeAdmin()
-      spinner.succeed("[eiwa] creating admin successfully...")
+      spinner.succeed("creating admin successfully...")
     }
 
     if (options.make && options.plugin) {
-      spinner.start("[eiwa] creating plugin...")
-      setTimeout(async () => {
-        spinner.stop()
-        await LibCLIMakePlugin()
-        spinner.succeed("[eiwa] creating plugin successfully...")
-      }, 1000)
+      await LibCLIMakePlugin()
+      spinner.succeed("creating plugin successfully...")
     }
   } catch (error) {
     spinner.warn(error)
@@ -215,8 +205,6 @@ const LibCLIRunning = async () => {
     spinner.stop();
     process.exit(1)
   }
-
 }
-
 
 LibCLIRunning()

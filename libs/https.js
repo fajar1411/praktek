@@ -1,6 +1,5 @@
 const {TokenExpiredError} = require("jsonwebtoken");
 
-
 const LibHTTPResponseException = (res, error) => {
   if (error?.status === 401 && error?.message) {
     return res.status(error.status).json({
