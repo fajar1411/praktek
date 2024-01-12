@@ -214,3 +214,25 @@ APP_ACCESS_TOKEN_LIFETIME=3h
 > **Note**: don't forget to always replace `APP_KEY` with
 > your preferences!
 
+## Creating Plugins
+
+If you want to share your module, you can use the following command to archive your module:
+
+```bash
+npm run eiwa -- --make --plugin
+```
+
+Here you will be asked to enter the name of your module to archive. 
+Fill in the name of the module you want to archive, for example:
+
+```bash
+? Module name: suppliers
+√ [eiwa] creating plugin successfully...
+```
+
+Now you can see the `plugins` folder. 
+There there are modules that you have archived. 
+You can share it with anyone.
+
+> **Note**: In this version, to install the plugin, simply extract the archive to the `modules` folder 
+> and register the router module in `index.js`

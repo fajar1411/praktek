@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const { DatabaseMongoDBConnector } = require("./libs/databases");
 const { LibModuleRegister } = require("./libs/modules");
-const { UserRouter } = require("./plugins/users/routers");
+const { UserRouter } = require("./providers/users/routers");
 
 const app = express();
 

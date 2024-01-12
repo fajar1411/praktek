@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { LibHTTPResponseException } = require("./https");
-const { User } = require("../plugins/users/models");
+const { User } = require("../providers/users/models");
 
 const LibAuthenticationMakeJWT = (payload) => {
   return jwt.sign(payload, process.env.APP_KEY, {
