@@ -44,23 +44,11 @@ const LibCLISanitizeName = (name) => {
 };
 
 const LibCLICreateUserAdmin = async (answer) => {
-  return new Promise((resolve, reject) => {
-    answer.password = bcrypt.hashSync(answer.password, 10)
-    answer.isAdmin = true;
-    answer.isStaff = true;
-    answer.isActive = true;
-
-    const timer = setTimeout(async () => {
-      try {
-        await User.create(answer);
-        clearTimeout(timer);
-        resolve(true)
-      } catch (error) {
-        reject(error);
-      }
-
-    }, 1200)
-  })
+  answer.password = bcrypt.hashSync(answer.password, 10)
+  answer.isAdmin = true;
+  answer.isStaff = true;
+  answer.isActive = true;
+  await User.create(answer);
 }
 
 
@@ -208,11 +196,9 @@ const LibCLIRunning = async () => {
 
     if (options.make && options.admin) {
       spinner.start("[eiwa] creating admin...")
-      setTimeout(async () => {
-        spinner.stop()
-        await LibCLIMakeAdmin()
-        spinner.succeed("[eiwa] creating admin successfully...")
-      }, 1000)
+      spinner.stop()
+      await LibCLIMakeAdmin()
+      spinner.succeed("[eiwa] creating admin successfully...")
     }
 
     if (options.make && options.plugin) {
@@ -225,6 +211,7 @@ const LibCLIRunning = async () => {
     }
   } catch (error) {
     spinner.warn(error)
+  } finally {
     spinner.stop();
     process.exit(1)
   }
