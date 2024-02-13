@@ -28,6 +28,9 @@ const LibAuthenticationMiddleware = async (req, res, next) => {
 
     return next();
   } catch (error) {
+    if (error instanceof  jwt.JsonWebTokenError){
+      return res.status(401).json({detail:"invalid token"})
+    }
     return LibHTTPResponseException(res, error);
   }
 };

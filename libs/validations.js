@@ -18,10 +18,13 @@ LibValidationGroup = (errors, field) => {
 const LibValidationExceptionMiddleware = (req, res, next) => {
   const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
+  if (!errors.isEmpty()) {//Jika objek errors tidak kosong (ada error),
+    console.error("Validation errors:", errors.array());
     return res.status(400).json(LibValidationGroup(errors.array(), "path"));
   }
+//req.clenedata adalah state sementara yang berisi data-data  yang baru masuk /reqjsonnya
 
+//matched data adalah  request yang sudah di bersihkan atau yang sudah di validation/validationresult
   req.cleanedData = matchedData(req);
 
   return next();
@@ -39,8 +42,13 @@ const Field = ({
 
   fieldSet.notEmpty().withMessage("This field not be blank").bail();
 
-  if (!required) {
+  if (!required) {//ketika requirednya tidak ada
     fieldSet.optional();
+    //fungsi optional ini berguna untuk ketika data kita adain kita tempatkan jsonya  validasi yang lain diabaikan
+    //contohnya adalah ketika kita ingin mengupdate data,data-data tersebut harus sesuai data yang kita update
+    //contoh ketika kita ingin mengupdate barang, barang itu terdapat field nama,merek.
+    //disaat file middlewares maka kita harus setting required false
+    //ketika kita ingin mengupdate nama barang saja maka merek tidak akan terkena validasi
   }
 
   for (const custom of customs) {
