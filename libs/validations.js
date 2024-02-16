@@ -85,6 +85,15 @@ const NumberField = ({ minLength = 1, maxLength = 20000000, ...args }) => {
 
   return fieldSet;
 };
+function BooleanField({ field, ...args }) {
+  const col = Field({ field, ...args });
+  col
+    .isBoolean()
+    .withMessage(`${field} harus berupa nilai true atau false`)
+    .bail();
+
+  return col;
+}
 
 const ArrayField = ({ minLength = 1, maxLength = 30, ...args }) => {
   const fieldSet = Field(args);

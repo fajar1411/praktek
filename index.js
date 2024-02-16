@@ -9,6 +9,7 @@ const { BarangRouter } = require("./modules/barang/routers");
 const { TerimaRouter } = require("./modules/terima/routers");
 const { KasRouter } = require("./modules/kas/routers");
 const { PemasokRouter } = require("./modules/pemasok/routers");
+const { KasirRouter } = require("./modules/kasir/routers");
 // const bodyParser = require('body-parser');
 const app = express();
 app.use(cors({
@@ -25,6 +26,7 @@ LibModuleRegister(app, "users", UserRouter);
 LibModuleRegister(app, "hello", HelloRouter);
 LibModuleRegister(app, "barang",BarangRouter)
 LibModuleRegister(app, "pemasok",PemasokRouter)
+LibModuleRegister(app, "kasir",KasirRouter)
 // LibModuleRegister(app, "terima",TerimaRouter)
 // LibModuleRegister(app, "kas",KasRouter);
 app.listen(process.env.APP_PORT, function () {
